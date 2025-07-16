@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c41netsr5yoin"]
+
+[ext_resource type="Script" uid="uid://gxlfomxdf0nw" path="res://src/components/field/figure_generator/figure_generator.gd" id="1_2t6u2"]
+
+[node name="FigureGenerator" type="Node"]
+script = ExtResource("1_2t6u2")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://w2pd6uwe1568"]
+
+[ext_resource type="Script" uid="uid://bmghq3oqy8tiu" path="res://src/components/field/figure_mover/figure_mover.gd" id="1_h46ca"]
+
+[node name="FigureMover" type="Node"]
+script = ExtResource("1_h46ca")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

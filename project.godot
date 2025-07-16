@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="mana-tetris"
+run/main_scene="uid://ci4ndl0632atk"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+FieldConfig="*res://src/config/config.gd"
+
+[layer_names]
+
+2d_render/layer_1="Cell"
+2d_render/layer_2="Wall"
+2d_physics/layer_1="Cells"
+2d_physics/layer_2="Walls"
+
+[rendering]
+
+renderer/rendering_method="mobile"

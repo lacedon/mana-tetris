@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcibk1m7gbtwi"]
+
+[ext_resource type="Script" uid="uid://d17e5h42be7ce" path="res://src/components/field/walls/walls.gd" id="1_ujlo6"]
+
+[node name="Walls" type="Node2D"]
+script = ExtResource("1_ujlo6")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
