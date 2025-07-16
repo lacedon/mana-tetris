@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci4ndl0632atk"]
+[gd_scene load_steps=8 format=3 uid="uid://ci4ndl0632atk"]
 
 [ext_resource type="Script" uid="uid://cxb7hnsol57tb" path="res://src/components/field/field.gd" id="1_hthpe"]
 [ext_resource type="Resource" uid="uid://cnwnkomu0em8v" path="res://data/figure_list.tres" id="2_3rcqf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dcibk1m7gbtwi" path="res://src/components/field/walls/walls.tscn" id="4_6sdv8"]
 [ext_resource type="PackedScene" uid="uid://w2pd6uwe1568" path="res://src/components/field/figure_mover/figure_mover.tscn" id="4_u8k16"]
 [ext_resource type="PackedScene" uid="uid://c2hydwapiwltv" path="res://src/components/field/grid/grid.tscn" id="5_0hdck"]
+[ext_resource type="PackedScene" uid="uid://dws6kt3fjmvdt" path="res://src/components/controller/controller.tscn" id="5_040dr"]
 
 [node name="Field" type="Node2D"]
 script = ExtResource("1_hthpe")
@@ -16,6 +17,9 @@ figureList = ExtResource("2_3rcqf")
 figureContainer = NodePath("../FigureContainer")
 
 [node name="FigureMover" parent="." instance=ExtResource("4_u8k16")]
+
+[node name="Controller" parent="." node_paths=PackedStringArray("figureMover") instance=ExtResource("5_040dr")]
+figureMover = NodePath("../FigureMover")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(-128, -128)
@@ -35,13 +39,5 @@ offset_right = 169.0
 offset_bottom = 130.0
 text = "Use another figure"
 
-[node name="RotateFigure" type="Button" parent="."]
-offset_left = 58.0
-offset_top = 192.0
-offset_right = 167.0
-offset_bottom = 223.0
-text = "Rotate figure"
-
 [connection signal="figure_spawned" from="FigureGenerator" to="." method="_set_figure_node"]
 [connection signal="pressed" from="UseNextFigure" to="." method="regenerate_figure"]
-[connection signal="pressed" from="RotateFigure" to="." method="_rotate_figure"]

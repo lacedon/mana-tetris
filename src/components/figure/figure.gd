@@ -58,6 +58,9 @@ func set_figure(newFigure: GameFigure) -> void:
 func move_down_figure() -> void:
     self.position.y += FieldConfig.cellSize.y
 
+func move_figure(xDirection: int) -> void:
+    self.position.x += xDirection * FieldConfig.cellSize.x
+
 func rotate_figure() -> void:
     rotationMode = (rotationMode + 1) % 4
     _set_up_figure_cells(figure.get_area())

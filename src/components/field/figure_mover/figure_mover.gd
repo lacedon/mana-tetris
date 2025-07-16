@@ -20,3 +20,12 @@ func _on_timer_timeout() -> void:
 func rotate_figure() -> void:
     if figureNode:
         figureNode.rotate_figure()
+
+func drop_figure() -> void:
+    if figureNode:
+        # TODO: Implement drop logic
+        pass
+
+func move_figure(direction: int) -> void:
+    if figureNode:
+        figureNode.move_figure(direction)

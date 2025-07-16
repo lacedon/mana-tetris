@@ -20,6 +20,3 @@ func _set_figure_node(newFigureNode: Node2D) -> void:
 
 func _ready() -> void:
     figureMover.set_figure_node(figureNode)
-
-func _rotate_figure() -> void:
-    figureMover.rotate_figure()
