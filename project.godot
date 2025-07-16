@@ -53,10 +53,9 @@ drop={
 
 [layer_names]
 
-2d_render/layer_1="Cell"
-2d_render/layer_2="Wall"
 2d_physics/layer_1="Cells"
-2d_physics/layer_2="Walls"
+2d_physics/layer_2="Floor"
+2d_physics/layer_3="Walls"
 
 [rendering]
 
