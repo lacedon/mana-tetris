@@ -15,4 +15,8 @@ func set_figure_node(newFigureNode: FigureNode) -> void:
 
 func _on_timer_timeout() -> void:
     if figureNode:
-        figureNode.move_down()
+        figureNode.move_down_figure()
+
+func rotate_figure() -> void:
+    if figureNode:
+        figureNode.rotate_figure()
