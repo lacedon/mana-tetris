@@ -3,6 +3,8 @@ extends Node2D
 const CellScene = preload("res://src/components/cell/cell.tscn")
 const CellNode = preload("res://src/components/cell/cell.gd")
 
+signal figure_set(figure: GameFigure)
+
 @export var figure: GameFigure
 
 @onready var rayCast2D: RayCast2D = $RayCast2D
@@ -62,6 +64,8 @@ func set_figure(newFigure: GameFigure) -> void:
 func move_down_figure() -> void:
     if _can_move_down():
         self.position.y += FieldConfig.cellSize.y
+    else:
+        emit_signal("figure_set", figure)
 
 func move_figure_side(xDirection: int) -> void:
     if _can_move_side(xDirection):
