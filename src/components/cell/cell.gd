@@ -5,7 +5,7 @@ const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
 @export var cellType: CELL_TYPES = CELL_TYPES.EMPTY
 
 @onready var polygon: Polygon2D = $Polygon2D
-@onready var collisionPolygon: CollisionPolygon2D = $RigidBody2D/CollisionPolygon2D
+@onready var collisionPolygon: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 
 func _ready() -> void:
     make_rectangle(FieldConfig.cellSize)
