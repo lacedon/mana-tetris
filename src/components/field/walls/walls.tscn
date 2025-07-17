@@ -1,14 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcibk1m7gbtwi"]
+[gd_scene load_steps=5 format=3 uid="uid://dcibk1m7gbtwi"]
 
 [ext_resource type="Script" uid="uid://d17e5h42be7ce" path="res://src/components/field/walls/walls.gd" id="1_ujlo6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ujlo6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ac3kl"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cl5ig"]
 
 [node name="Walls" type="Node2D"]
 script = ExtResource("1_ujlo6")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FloorArea2D" type="Area2D" parent="."]
+position = Vector2(0, 1280)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="Polygon2D" type="Polygon2D" parent="FloorArea2D"]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(0, 0, 640, 0, 640, 64, 0, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorArea2D"]
+shape = SubResource("WorldBoundaryShape2D_ujlo6")
+debug_color = Color(0.828975, 0.341365, 0.520172, 0.42)
+
+[node name="WallLeftArea2D" type="Area2D" parent="."]
+position = Vector2(-64, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="WallLeftArea2D"]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(0, 0, 64, 0, 64, 1280, 0, 1280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeftArea2D"]
+shape = SubResource("WorldBoundaryShape2D_ac3kl")
+
+[node name="WallRightArea2D" type="Area2D" parent="."]
+position = Vector2(640, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="WallRightArea2D"]
+color = Color(0.5, 0.5, 0.5, 1)
+polygon = PackedVector2Array(0, 0, 64, 0, 64, 1280, 0, 1280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRightArea2D"]
+shape = SubResource("WorldBoundaryShape2D_cl5ig")
