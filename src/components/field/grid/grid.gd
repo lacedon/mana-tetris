@@ -1,9 +1,12 @@
 extends Node2D
 
+@export var color: Color = Color(1, 1, 1, 0.1)
+
 func _create_line(start: Vector2, end: Vector2) -> Line2D:
     var line = Line2D.new()
     line.name = "GridLine" + str(start) + "-" + str(end)
     line.width = 2
+    line.default_color = color
     line.add_point(start * FieldConfig.cellSize)
     line.add_point(end * FieldConfig.cellSize)
     return line
