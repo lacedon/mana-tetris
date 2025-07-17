@@ -14,7 +14,7 @@ func set_figure_node(newFigureNode: FigureNode) -> void:
     timer.start()
 
 func _on_timer_timeout() -> void:
-    if figureNode:
+    if figureNode && !isPaused:
         figureNode.move_down_figure()
 
 func rotate_figure() -> void:
@@ -28,4 +28,4 @@ func drop_figure() -> void:
 
 func move_figure(direction: int) -> void:
     if figureNode:
-        figureNode.move_figure(direction)
+        figureNode.move_figure_side(direction)

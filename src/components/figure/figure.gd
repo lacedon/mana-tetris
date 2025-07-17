@@ -5,6 +5,8 @@ const CellNode = preload("res://src/components/cell/cell.gd")
 
 @export var figure: GameFigure
 
+@onready var rayCast2D: RayCast2D = $RayCast2D
+
 var cells: Array[CellNode] = []
 var rotationMode: int = 0
 
@@ -55,13 +57,36 @@ func set_figure(newFigure: GameFigure) -> void:
     _set_up_figure_cells(figureArea)
     _hide_unused_cells(figureArea)
 
-func move_down_figure() -> void:
-    self.position.y += FieldConfig.cellSize.y
+    _define_ray_cast_2d()
 
-func move_figure(xDirection: int) -> void:
-    self.position.x += xDirection * FieldConfig.cellSize.x
+func move_down_figure() -> void:
+    if _can_move_down():
+        self.position.y += FieldConfig.cellSize.y
+
+func move_figure_side(xDirection: int) -> void:
+    if _can_move_side(xDirection):
+        self.position.x += xDirection * FieldConfig.cellSize.x
 
 func rotate_figure() -> void:
     rotationMode = (rotationMode + 1) % 4
     _set_up_figure_cells(figure.get_area())
     pass
+
+func _define_ray_cast_2d() -> void:
+    if !rayCast2D || !figure: return
+    rayCast2D.position = Vector2(float(figure.size.x) / 2, 0) * FieldConfig.cellSize
+
+func _can_move_side(xDirection: int) -> bool:
+    return _can_move_to(Vector2(xDirection * (float(figure.size.x) / 2) * FieldConfig.cellSize.x, 0))
+
+func _can_move_down() -> bool:
+    return _can_move_to(Vector2(0, (figure.size.y) * FieldConfig.cellSize.y))
+
+func _can_move_to(target: Vector2) -> bool:
+    if !rayCast2D: return false
+    rayCast2D.target_position = target
+    rayCast2D.force_raycast_update()
+    return !rayCast2D.is_colliding()
+
+func _ready() -> void:
+    _define_ray_cast_2d()
