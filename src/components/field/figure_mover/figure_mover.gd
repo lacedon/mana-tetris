@@ -8,9 +8,7 @@ const FigureNode = preload("res://src/components/figure/figure.gd")
 
 @onready var timer: Timer = $Timer
 
-func set_figure_node(newFigureNode: FigureNode) -> void:
-    self.figureNode = newFigureNode
-
+func _ready() -> void:
     timer.start()
 
 func _on_timer_timeout() -> void:

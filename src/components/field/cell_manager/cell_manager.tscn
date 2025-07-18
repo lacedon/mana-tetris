@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://diwdpg65wgwks"]
+
+[ext_resource type="Script" uid="uid://caotjalvcutwr" path="res://src/components/field/cell_manager/cell_manager.gd" id="1_ds5rh"]
+
+[node name="CellManager" type="Node"]
+script = ExtResource("1_ds5rh")

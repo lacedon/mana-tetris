@@ -3,14 +3,11 @@ extends Node
 const FigureScene = preload("res://src/components/figure/figure.tscn")
 const FigureNode = preload("res://src/components/figure/figure.gd")
 
-signal figure_spawned(figureNode: FigureNode)
-
 @export var figureList: GameFigureList
-@export var figureContainer: Node = self
+@export var figureNode: FigureNode
 
 @onready var currentFigure: GameFigure = get_random_figure()
 @onready var nextFigure: GameFigure = get_random_figure()
-@onready var figureNode: FigureNode = FigureScene.instantiate() as FigureNode
 
 func get_random_figure() -> GameFigure:
     if figureList.figures.size() == 0:
@@ -38,7 +35,4 @@ func respawn_figure() -> void:
 func _ready() -> void:
     if !currentFigure: return
 
-    figureContainer.add_child(figureNode)
     respawn_figure()
-
-    figure_spawned.emit(figureNode)
