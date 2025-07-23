@@ -5,6 +5,7 @@ const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
 @export var cellType: CELL_TYPES = CELL_TYPES.EMPTY
 
 @onready var polygon: Polygon2D = $Polygon2D
+@onready var area2d: Area2D = $Area2D
 @onready var collisionPolygon: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 
 func _ready() -> void:
@@ -41,3 +42,6 @@ func _set_color_by_type() -> void:
             polygon.color = Color(1, 1, 0)
         _:
             polygon.color = Color(1, 1, 1) # Default color for unknown types
+
+func get_collision_object() -> CollisionObject2D:
+    return area2d

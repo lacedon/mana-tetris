@@ -6,5 +6,6 @@
 script = ExtResource("1_b7ta8")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-exclude_parent = false
 collision_mask = 7
+hit_from_inside = true
+collide_with_areas = true

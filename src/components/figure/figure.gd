@@ -25,6 +25,9 @@ func _add_missing_cells(figureArea: int = figure.get_area()) -> void:
             cells.append(cellInstance)
             add_child(cellInstance)
 
+            if (rayCast2D):
+                rayCast2D.add_exception(cellInstance.get_collision_object())
+
 func _get_cell_position(index: int, figureSize: Vector2) -> Vector2:
     var x: int = index % int(figureSize.x)
     var y: int = floor(index / figureSize.x)
@@ -55,6 +58,9 @@ func _hide_unused_cells(figureArea: int = figure.get_area()) -> void:
 func _define_ray_cast_2d() -> void:
     if !rayCast2D || !figure: return
     rayCast2D.position = Vector2(float(figure.size.x) / 2, 0) * FieldConfig.cellSize
+
+    for cell in cells:
+        rayCast2D.add_exception(cell.get_collision_object())
 
 func _can_move_side(xDirection: int) -> bool:
     return _can_move_to(Vector2(xDirection * (float(figure.size.x) / 2) * FieldConfig.cellSize.x, 0))
@@ -94,3 +100,6 @@ func rotate_figure() -> void:
     rotationMode = (rotationMode + 1) % 4
     _set_up_figure_cells(figure.get_area())
     pass
+
+func get_cells() -> Array[CellNode]:
+    return cells
