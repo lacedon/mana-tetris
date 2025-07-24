@@ -100,6 +100,3 @@ func rotate_figure() -> void:
     rotationMode = (rotationMode + 1) % 4
     _set_up_figure_cells(figure.get_area())
     pass
-
-func get_cells() -> Array[CellNode]:
-    return cells
