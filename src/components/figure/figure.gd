@@ -21,6 +21,7 @@ func _add_missing_cells(figureArea: int = figure.get_area()) -> void:
         for index in range(cellCount, figureArea):
             var cellInstance: CellNode = CellScene.instantiate() as CellNode
             cellInstance.name = "Cell#" + str(index)
+            cellInstance.isVirtual = true
             cellInstance.hide()
             cells.append(cellInstance)
             add_child(cellInstance)

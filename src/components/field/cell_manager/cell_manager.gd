@@ -15,18 +15,26 @@ func _ready() -> void:
 func _exit_tree() -> void:
     figureNode.disconnect(figureNode.figure_set.get_name(), _set_figure_cells)
 
+func _handle_last_cell_ready() -> void:
+    emit_signal(cells_updated.get_name())
+
 func _set_figure_cells(figure: GameFigure) -> void:
     var figurePosition: Vector2 = figureNode.position
-    for cellIndex in range(figure.cells.size()):
+    var lastCellInstance: CellNode = null
+    var cellCount: int = figure.cells.size()
+    for cellIndex in range(cellCount):
         var cell: GameCell = figure.cells[cellIndex]
+        var isLastCell: bool = cellIndex == (cellCount - 1)
 
         if !cell || cell.cellType == CELL_TYPES.EMPTY:
             continue
 
         var cellInstance: CellNode = CellScene.instantiate()
-        cellInstance.name = "Cell"
-        cellInstance.set_cell_type(cell.cellType)
-        cellInstance.position = figurePosition + figureNode.cells[cellIndex].position
-        add_child(cellInstance)
+        if isLastCell:
+            cellInstance.connect(cellInstance.cell_ready.get_name(), _handle_last_cell_ready, CONNECT_ONE_SHOT)
 
-    emit_signal(cells_updated.get_name())
+        var cellPosition: Vector2 = figurePosition + figureNode.cells[cellIndex].position
+        cellInstance.name = "Cell" + str(cellPosition / FieldConfig.cellSize)
+        cellInstance.set_cell_type(cell.cellType)
+        cellInstance.position = cellPosition
+        add_child(cellInstance)

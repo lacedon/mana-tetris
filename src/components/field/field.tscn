@@ -27,13 +27,13 @@ figureNode = NodePath("../Figure")
 [node name="Controller" parent="." node_paths=PackedStringArray("figureMover") instance=ExtResource("5_040dr")]
 figureMover = NodePath("../FigureMover")
 
-[node name="RowDetector" parent="." instance=ExtResource("7_3mxdh")]
-
 [node name="Decorations" type="Node" parent="."]
 
 [node name="Walls" parent="Decorations" instance=ExtResource("4_6sdv8")]
 
 [node name="Grid" parent="Decorations" instance=ExtResource("5_0hdck")]
+
+[node name="RowDetector" parent="." instance=ExtResource("7_3mxdh")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(-128, -128)

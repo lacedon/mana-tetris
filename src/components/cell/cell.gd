@@ -1,8 +1,12 @@
 extends Node2D
 
+const NONE_COLLISION = 0
 const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
 
+signal cell_ready
+
 @export var cellType: CELL_TYPES = CELL_TYPES.EMPTY
+@export var isVirtual: bool = false
 
 @onready var polygon: Polygon2D = $Polygon2D
 @onready var area2d: Area2D = $Area2D
@@ -11,6 +15,11 @@ const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
 func _ready() -> void:
     make_rectangle(FieldConfig.cellSize)
     _set_color_by_type()
+
+    if isVirtual:
+        area2d.collision_layer = NONE_COLLISION
+
+    emit_signal(cell_ready.get_name())
 
 func make_rectangle(size: Vector2) -> void:
     var corners: PackedVector2Array = [

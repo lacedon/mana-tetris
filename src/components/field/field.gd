@@ -7,6 +7,4 @@ const RowDetector = preload("res://src/components/field/row_detector/row_detecto
 @onready var rowDetector: RowDetector = $RowDetector
 
 func handle_calls_updated() -> void:
-    prints('handle_calls_updated')
-    rowDetector.check_row_fulfillment()
     figureGenerator.use_next_figure()
