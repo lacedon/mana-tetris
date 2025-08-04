@@ -30,6 +30,10 @@ func _create_debug_numers() -> void:
         add_child(rowIndexLabel)
         add_child(cellCounterLabel)
 
+func _show_debug_info(cellNumberList: Array[int]) -> void:
+    for index in range(cellNumberList.size()):
+        cellCounterLabels[index].text = str(cellNumberList[index])
+
 func _create_area_list() -> void:
     for i in range(0, FieldConfig.fieldSize.y):
         var rectangle: RectangleShape2D = RectangleShape2D.new()
@@ -53,14 +57,14 @@ func _create_area_list() -> void:
 
 func _get_area_collision_fillment() -> Array[int]:
     var fullRowCellCount: int = FieldConfig.fieldSize.x
-    var isFilledByAreaList: Array[int] = []
+    var cellNumberList: Array[int] = []
     for areaIndex in range(areaList.size()):
         var area: Area2D = areaList[areaIndex]
         var size: int = area.get_overlapping_areas().size()
-        isFilledByAreaList.append(size)
-        cellCounterLabels[areaIndex].text = str(size)
+        cellNumberList.append(size)
 
-    return isFilledByAreaList
+    return cellNumberList
 
 func _handle_cell_intersection(_area2D: Area2D) -> void:
-    _get_area_collision_fillment()
+    var cellNumberList: Array[int] = _get_area_collision_fillment()
+    _show_debug_info(cellNumberList)
