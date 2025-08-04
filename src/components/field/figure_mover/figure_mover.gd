@@ -33,3 +33,6 @@ func toggle_figure_dropping(isFastMovingEnabled) -> void:
 func move_figure(direction: int) -> void:
     if figureNode:
         figureNode.move_figure_side(direction)
+
+func toggle_pause() -> void:
+    isPaused = !isPaused
