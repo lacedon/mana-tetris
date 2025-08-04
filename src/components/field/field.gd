@@ -1,8 +1,12 @@
 extends Node2D
 
 const FigureGenerator = preload("res://src/components/field/figure_generator/figure_generator.gd")
+const RowDetector = preload("res://src/components/field/row_detector/row_detector.gd")
 
 @onready var figureGenerator: FigureGenerator = $FigureGenerator
+@onready var rowDetector: RowDetector = $RowDetector
 
-func regenerate_figure() -> void:
+func handle_calls_updated() -> void:
+    prints('handle_calls_updated')
+    rowDetector.check_row_fulfillment()
     figureGenerator.use_next_figure()
