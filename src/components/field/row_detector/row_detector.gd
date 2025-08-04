@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
     for area2D in areaList:
-        area2D.disconnect("area_entered", _handle_cell_intersection)
+        area2D.disconnect(area2D.area_entered.get_name(), _handle_cell_intersection)
 
 func _create_debug_numers() -> void:
     for i in range(0, FieldConfig.fieldSize.y):
@@ -50,7 +50,7 @@ func _create_area_list() -> void:
         area2D.collision_layer = NONE_COLLISION
         area2D.collision_mask = CELL_COLLISION
 
-        area2D.connect("area_entered", _handle_cell_intersection)
+        area2D.connect(area2D.area_entered.get_name(), _handle_cell_intersection)
 
         add_child(area2D)
         areaList.append(area2D)
