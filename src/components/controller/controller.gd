@@ -15,3 +15,5 @@ func _input(event: InputEvent) -> void:
         figureMover.move_figure(-1)
     elif event.is_action_pressed("move-right"):
         figureMover.move_figure(1)
+    elif event.is_action_pressed("pause"):
+        figureMover.toggle_pause()
