@@ -1,5 +1,7 @@
 extends Node
 
+signal filled_rows_detected(filledRows: Array[int])
+
 const NONE_COLLISION = 0
 const CELL_COLLISION = 1
 
@@ -78,3 +80,5 @@ func _handle_cell_intersection(_area2D: Area2D) -> void:
     _show_debug_info(cellNumberList)
 
     var filledRows: Array[int] = _get_filled_rows(cellNumberList)
+    if filledRows.size() > 0:
+        emit_signal(filled_rows_detected.get_name(), filledRows)
