@@ -4,5 +4,5 @@ const FigureGenerator = preload("res://src/components/field/figure_generator/fig
 
 @onready var figureGenerator: FigureGenerator = $FigureGenerator
 
-func handle_calls_updated() -> void:
+func handle_cells_updated() -> void:
     figureGenerator.use_next_figure()
