@@ -58,7 +58,6 @@ func _create_area_list() -> void:
         areaList.append(area2D)
 
 func _get_area_collision_fillment() -> Array[int]:
-    var fullRowCellCount: int = FieldConfig.fieldSize.x
     var cellNumberList: Array[int] = []
     for areaIndex in range(areaList.size()):
         var area: Area2D = areaList[areaIndex]
@@ -69,7 +68,7 @@ func _get_area_collision_fillment() -> Array[int]:
 
 func _get_filled_rows(cellNumberList: Array[int]) -> Array[int]:
     var result: Array[int] = []
-    var fullRowCellCount: int = FieldConfig.fieldSize.x
+    var fullRowCellCount: int = int(FieldConfig.fieldSize.x)
     for rowIndex in range(cellNumberList.size()):
         if cellNumberList[rowIndex] == fullRowCellCount:
             result.append(rowIndex)

@@ -20,7 +20,6 @@ func _handle_last_cell_ready() -> void:
 
 func _set_figure_cells(figure: GameFigure) -> void:
     var figurePosition: Vector2 = figureNode.position
-    var lastCellInstance: CellNode = null
     var cellCount: int = figure.cells.size()
     for cellIndex in range(cellCount):
         var cell: GameCell = figure.cells[cellIndex]
