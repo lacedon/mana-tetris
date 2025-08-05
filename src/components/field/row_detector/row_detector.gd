@@ -69,7 +69,7 @@ func _get_filled_rows(cellNumberList: Array[int]) -> Array[int]:
     var result: Array[int] = []
     var fullRowCellCount: int = FieldConfig.fieldSize.x
     for rowIndex in range(cellNumberList.size()):
-        if cellNumberList[rowIndex] === fullRowCellCount:
+        if cellNumberList[rowIndex] == fullRowCellCount:
             result.append(rowIndex)
     return result
 
