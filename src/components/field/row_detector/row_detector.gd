@@ -65,6 +65,16 @@ func _get_area_collision_fillment() -> Array[int]:
 
     return cellNumberList
 
+func _get_filled_rows(cellNumberList: Array[int]) -> Array[int]:
+    var result: Array[int] = []
+    var fullRowCellCount: int = FieldConfig.fieldSize.x
+    for rowIndex in range(cellNumberList.size()):
+        if cellNumberList[rowIndex] === fullRowCellCount:
+            result.append(rowIndex)
+    return result
+
 func _handle_cell_intersection(_area2D: Area2D) -> void:
     var cellNumberList: Array[int] = _get_area_collision_fillment()
     _show_debug_info(cellNumberList)
+
+    var filledRows: Array[int] = _get_filled_rows(cellNumberList)
