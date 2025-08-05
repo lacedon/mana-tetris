@@ -51,3 +51,4 @@ offset_bottom = 130.0
 text = "Use another figure"
 
 [connection signal="cells_updated" from="CellManager" to="." method="handle_cells_updated"]
+[connection signal="filled_rows_detected" from="RowDetector" to="." method="handle_row_filled"]
