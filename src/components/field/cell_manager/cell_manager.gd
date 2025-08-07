@@ -42,15 +42,14 @@ func _set_figure_cells(figure: GameFigure) -> void:
         add_child(cell_instance)
 
 func handle_row_filled(row_indexes: Array[int]) -> void:
-    var max_row_index: int = MathHelpers.get_max_value(row_indexes)
-
     for cell in get_children():
         if !(cell is CellNode): continue
 
         var cell_row_index: int = cell.position.y / FieldConfig.cell_size.y
-        if row_indexes.has(cell_row_index):
-            cell.queue_free()
-        elif cell_row_index < max_row_index:
-            cell.position.y += FieldConfig.cell_size.y
+        for row_index in row_indexes:
+            if row_index == cell_row_index:
+                cell.queue_free()
+            if row_index > cell_row_index:
+                cell.position.y += FieldConfig.cell_size.y            
 
     emit_signal(cells_updated.get_name())

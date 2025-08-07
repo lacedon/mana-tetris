@@ -11,4 +11,3 @@ func handle_cells_updated() -> void:
 
 func handle_row_filled(filled_rows: Array[int]) -> void:
     cell_manager_ref.handle_row_filled(filled_rows)
-    pass
