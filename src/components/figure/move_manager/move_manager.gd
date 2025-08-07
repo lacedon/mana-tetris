@@ -20,11 +20,11 @@ func _can_move_side(figure: GameFigure, xDirection: int) -> bool:
 func _can_move_down(figure: GameFigure) -> bool:
     return _can_move_to(Vector2(0, (figure.size.y) * FieldConfig.cellSize.y))
 
-func init(figure: GameFigure, shouldResetMode: bool = false) -> void:
-    if shouldResetMode: rotationMode = 0
+func init(figure: GameFigure) -> void:
+    rotationMode = 0
     _define_ray_cast_2d(figure)
 
-func getMoveRotationMode() -> int:
+func get_rotation_mode() -> int:
     return rotationMode
 
 func move_down_figure(figure: GameFigure, node: Node2D) -> bool:

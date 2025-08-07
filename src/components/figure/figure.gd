@@ -13,13 +13,13 @@ signal figure_set(figure: GameFigure)
 
 func _ready() -> void:
     moveManager.init(figure)
-    cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
+    cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
 
 func set_figure(newFigure: GameFigure) -> void:
     figure = newFigure
 
-    if cellManager: cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
-    if moveManager: moveManager.init(figure, true)
+    if moveManager: moveManager.init(figure)
+    if cellManager: cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
 
 func move_down_figure() -> void:
     var hasMoved: bool = moveManager.move_down_figure(figure, self)
@@ -30,7 +30,7 @@ func move_figure_side(xDirection: int) -> void:
 
 func rotate_figure() -> void:
     var hasRotated: bool = moveManager.rotate_figure(figure)
-    if hasRotated: cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
+    if hasRotated: cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
 
 func get_cells() -> Array[CellNode]:
     return cellManager.get_cells()
