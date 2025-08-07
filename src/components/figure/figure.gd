@@ -1,103 +1,36 @@
 extends Node2D
 
-const CellScene = preload("res://src/components/cell/cell.tscn")
 const CellNode = preload("res://src/components/cell/cell.gd")
+const CellManager = preload("res://src/components/figure/cell_manager/cell_manager.gd")
+const MoveManager = preload("res://src/components/figure/move_manager/move_manager.gd")
 
 signal figure_set(figure: GameFigure)
 
 @export var figure: GameFigure
 
-@onready var rayCast2D: RayCast2D = $RayCast2D
-
-var cells: Array[CellNode] = []
-var rotationMode: int = 0
+@onready var cellManager: CellManager = $CellManager
+@onready var moveManager: MoveManager = $MoveManager
 
 func _ready() -> void:
-    _define_ray_cast_2d()
-
-func _add_missing_cells(figureArea: int = figure.get_area()) -> void:
-    var cellCount = cells.size()
-    if cellCount < figureArea:
-        for index in range(cellCount, figureArea):
-            var cellInstance: CellNode = CellScene.instantiate() as CellNode
-            cellInstance.name = "Cell#" + str(index)
-            cellInstance.isVirtual = true
-            cellInstance.hide()
-            cells.append(cellInstance)
-            add_child(cellInstance)
-
-            if (rayCast2D):
-                rayCast2D.add_exception(cellInstance.get_collision_object())
-
-func _get_cell_position(index: int, figureSize: Vector2) -> Vector2:
-    var x: int = index % int(figureSize.x)
-    var y: int = floor(index / figureSize.x)
-    if rotationMode == 1: # 90 degrees
-        return Vector2(y, figureSize.x - 1 - x)
-    elif rotationMode == 2: # 180 degrees
-        return Vector2(figureSize.x - 1 - x, figureSize.y - 1 - y)
-    elif rotationMode == 3: # 270 degrees
-        return Vector2(figureSize.y - 1 - y, x)
-    else: # 0 degrees
-        return Vector2(x, y)
-
-func _set_up_figure_cells(figureArea: int = figure.get_area()) -> void:
-    for index in range(figureArea):
-        var cellType: GameCell.CELL_TYPES = figure.get_cell_type(index)
-        var cell: CellNode = cells[index]
-        if cellType == GameCell.CELL_TYPES.EMPTY:
-            cell.hide()
-        else:
-            cell.show()
-            cell.set_cell_type(cellType)
-            cell.position = _get_cell_position(index, figure.size) * FieldConfig.cellSize
-
-func _hide_unused_cells(figureArea: int = figure.get_area()) -> void:
-    for index in range(figureArea, cells.size()):
-        cells[index].hide()
-
-func _define_ray_cast_2d() -> void:
-    if !rayCast2D || !figure: return
-    rayCast2D.position = Vector2(float(figure.size.x) / 2, 0) * FieldConfig.cellSize
-
-    for cell in cells:
-        rayCast2D.add_exception(cell.get_collision_object())
-
-func _can_move_side(xDirection: int) -> bool:
-    return _can_move_to(Vector2(xDirection * (float(figure.size.x) / 2) * FieldConfig.cellSize.x, 0))
-
-func _can_move_down() -> bool:
-    return _can_move_to(Vector2(0, (figure.size.y) * FieldConfig.cellSize.y))
-
-func _can_move_to(target: Vector2) -> bool:
-    if !rayCast2D: return false
-    rayCast2D.target_position = target
-    rayCast2D.force_raycast_update()
-    return !rayCast2D.is_colliding()
+    moveManager.init(figure)
+    cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
 
 func set_figure(newFigure: GameFigure) -> void:
-    rotationMode = 0
-
     figure = newFigure
-    var figureArea = figure.get_area()
 
-    _add_missing_cells(figureArea)
-    _set_up_figure_cells(figureArea)
-    _hide_unused_cells(figureArea)
-
-    _define_ray_cast_2d()
+    if cellManager: cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
+    if moveManager: moveManager.init(figure, true)
 
 func move_down_figure() -> void:
-    if _can_move_down():
-        self.position.y += FieldConfig.cellSize.y
-    else:
-        emit_signal("figure_set", figure)
+    var hasMoved: bool = moveManager.move_down_figure(figure, self)
+    if !hasMoved: emit_signal("figure_set", figure)
 
 func move_figure_side(xDirection: int) -> void:
-    if _can_move_side(xDirection):
-        self.position.x += xDirection * FieldConfig.cellSize.x
+    moveManager.move_figure_side(figure, xDirection, self)
 
 func rotate_figure() -> void:
-    rotationMode = (rotationMode + 1) % 4
-    _set_up_figure_cells(figure.get_area())
-    pass
+    var hasRotated: bool = moveManager.rotate_figure(figure)
+    if hasRotated: cellManager.set_up_cells(moveManager.getMoveRotationMode(), figure)
+
+func get_cells() -> Array[CellNode]:
+    return cellManager.get_cells()

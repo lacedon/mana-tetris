@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b67jfhf1j5spl"]
+
+[ext_resource type="Script" uid="uid://pruabdfuxxxf" path="res://src/components/figure/cell_manager/cell_manager.gd" id="1_2t460"]
+
+[node name="CellManager" type="Node2D"]
+script = ExtResource("1_2t460")

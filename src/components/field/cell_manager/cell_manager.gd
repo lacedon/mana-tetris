@@ -21,6 +21,7 @@ func _handle_last_cell_ready() -> void:
 
 func _set_figure_cells(figure: GameFigure) -> void:
     var figurePosition: Vector2 = figureNode.position
+    var figureCells: Array[CellNode] = figureNode.get_cells()
     var cellCount: int = figure.cells.size()
     for cellIndex in range(cellCount):
         var cell: GameCell = figure.cells[cellIndex]
@@ -33,7 +34,7 @@ func _set_figure_cells(figure: GameFigure) -> void:
         if isLastCell:
             cellInstance.connect(cellInstance.cell_ready.get_name(), _handle_last_cell_ready, CONNECT_ONE_SHOT)
 
-        var cellPosition: Vector2 = figurePosition + figureNode.cells[cellIndex].position
+        var cellPosition: Vector2 = figurePosition + figureCells[cellIndex].position
         var cellPositionInField: Vector2 = cellPosition / FieldConfig.cellSize
         cellInstance.name = "Cell" + str(cellPositionInField)
         cellInstance.set_cell_type(cell.cellType)

@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b57y3wwhyr864"]
+[gd_scene load_steps=4 format=3 uid="uid://b57y3wwhyr864"]
 
 [ext_resource type="Script" uid="uid://do43n2jqisk1j" path="res://src/components/figure/figure.gd" id="1_b7ta8"]
+[ext_resource type="PackedScene" uid="uid://b67jfhf1j5spl" path="res://src/components/figure/cell_manager/cell_manager.tscn" id="2_her3s"]
+[ext_resource type="PackedScene" uid="uid://chnj8rr2rroam" path="res://src/components/figure/move_manager/move_manager.tscn" id="3_6ys1a"]
 
 [node name="Figure" type="Node2D"]
 script = ExtResource("1_b7ta8")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-collision_mask = 7
-hit_from_inside = true
-collide_with_areas = true
+[node name="MoveManager" parent="." instance=ExtResource("3_6ys1a")]
+
+[node name="CellManager" parent="." instance=ExtResource("2_her3s")]
