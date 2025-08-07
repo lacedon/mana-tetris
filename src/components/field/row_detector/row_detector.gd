@@ -2,8 +2,7 @@ extends Node
 
 signal filled_rows_detected(filled_rows: Array[int])
 
-const NONE_COLLISION = 0
-const CELL_COLLISION = 1
+const Collisions = preload("res://src/common/collisions.gd").Collisions
 
 var area_list: Array[Area2D] = []
 var cell_counter_labels: Array[Label] = []
@@ -49,8 +48,8 @@ func _create_area_list() -> void:
         area_2d.name = "AreaRow#" + str(i)
         area_2d.position = Vector2(0, i) * FieldConfig.cell_size
         area_2d.add_child(collision_shape)
-        area_2d.collision_layer = NONE_COLLISION
-        area_2d.collision_mask = CELL_COLLISION
+        area_2d.collision_layer = Collisions.NONE
+        area_2d.collision_mask = Collisions.CELL
 
         area_2d.connect(area_2d.area_entered.get_name(), _handle_cell_intersection)
 
