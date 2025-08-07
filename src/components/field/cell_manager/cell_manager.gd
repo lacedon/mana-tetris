@@ -1,6 +1,6 @@
 extends Node
 
-const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
+const CellTypes = preload("res://src/types/cell_types.gd").CellTypes
 const FigureNode = preload("res://src/components/figure/figure.gd")
 const CellScene = preload("res://src/components/cell/cell.tscn")
 const CellNode = preload("res://src/components/cell/cell.gd")
@@ -8,49 +8,49 @@ const MathHelpers = preload("res://src/helpers/math.gd")
 
 signal cells_updated
 
-@export var figureNode: FigureNode
+@export var figure_node_ref: FigureNode
 
 func _ready() -> void:
-    figureNode.connect(figureNode.figure_set.get_name(), _set_figure_cells)
+    figure_node_ref.connect(figure_node_ref.figure_set.get_name(), _set_figure_cells)
 
 func _exit_tree() -> void:
-    figureNode.disconnect(figureNode.figure_set.get_name(), _set_figure_cells)
+    figure_node_ref.disconnect(figure_node_ref.figure_set.get_name(), _set_figure_cells)
 
 func _handle_last_cell_ready() -> void:
     emit_signal(cells_updated.get_name())
 
 func _set_figure_cells(figure: GameFigure) -> void:
-    var figurePosition: Vector2 = figureNode.position
-    var figureCells: Array[CellNode] = figureNode.get_cells()
-    var cellCount: int = figure.cells.size()
-    for cellIndex in range(cellCount):
-        var cell: GameCell = figure.cells[cellIndex]
-        var isLastCell: bool = cellIndex == (cellCount - 1)
+    var figure_position: Vector2 = figure_node_ref.position
+    var figure_cells: Array[CellNode] = figure_node_ref.get_cells()
+    var cell_count: int = figure.cells.size()
+    for cell_index in range(cell_count):
+        var cell: GameCell = figure.cells[cell_index]
+        var is_last_cell: bool = cell_index == (cell_count - 1)
 
-        if !cell || cell.cellType == CELL_TYPES.EMPTY:
+        if !cell || cell.cell_type == CellTypes.EMPTY:
             continue
 
-        var cellInstance: CellNode = CellScene.instantiate()
-        if isLastCell:
-            cellInstance.connect(cellInstance.cell_ready.get_name(), _handle_last_cell_ready, CONNECT_ONE_SHOT)
+        var cell_instance: CellNode = CellScene.instantiate()
+        if is_last_cell:
+            cell_instance.connect(cell_instance.cell_ready.get_name(), _handle_last_cell_ready, CONNECT_ONE_SHOT)
 
-        var cellPosition: Vector2 = figurePosition + figureCells[cellIndex].position
-        var cellPositionInField: Vector2 = cellPosition / FieldConfig.cellSize
-        cellInstance.name = "Cell" + str(cellPositionInField)
-        cellInstance.set_cell_type(cell.cellType)
-        cellInstance.position = cellPosition
-        add_child(cellInstance)
+        var cell_position: Vector2 = figure_position + figure_cells[cell_index].position
+        var cell_position_in_field: Vector2 = cell_position / FieldConfig.cell_size
+        cell_instance.name = "Cell" + str(cell_position_in_field)
+        cell_instance.set_cell_type(cell.cell_type)
+        cell_instance.position = cell_position
+        add_child(cell_instance)
 
-func handle_row_filled(rowIndexes: Array[int]) -> void:
-    var maxRowIndex: int = MathHelpers.getMaxValue(rowIndexes)
+func handle_row_filled(row_indexes: Array[int]) -> void:
+    var max_row_index: int = MathHelpers.get_max_value(row_indexes)
 
     for cell in get_children():
         if !(cell is CellNode): continue
 
-        var cellRowIndex: int = cell.position.y / FieldConfig.cellSize.y
-        if rowIndexes.has(cellRowIndex):
+        var cell_row_index: int = cell.position.y / FieldConfig.cell_size.y
+        if row_indexes.has(cell_row_index):
             cell.queue_free()
-        elif cellRowIndex < maxRowIndex:
-            cell.position.y += FieldConfig.cellSize.y
+        elif cell_row_index < max_row_index:
+            cell.position.y += FieldConfig.cell_size.y
 
     emit_signal(cells_updated.get_name())

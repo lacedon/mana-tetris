@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ci4ndl0632atk"]
 
 [ext_resource type="Script" uid="uid://cxb7hnsol57tb" path="res://src/components/field/field.gd" id="1_hthpe"]
-[ext_resource type="Resource" uid="uid://cnwnkomu0em8v" path="res://data/figure_list.tres" id="2_3rcqf"]
+[ext_resource type="Resource" uid="uid://cnwnkomu0em8v" path="res://data/figure_list.tres" id="3_3mxdh"]
 [ext_resource type="PackedScene" uid="uid://c41netsr5yoin" path="res://src/components/field/figure_generator/figure_generator.tscn" id="3_hfyhx"]
 [ext_resource type="PackedScene" uid="uid://dcibk1m7gbtwi" path="res://src/components/field/walls/walls.tscn" id="4_6sdv8"]
 [ext_resource type="PackedScene" uid="uid://w2pd6uwe1568" path="res://src/components/field/figure_mover/figure_mover.tscn" id="4_u8k16"]
@@ -14,18 +14,18 @@
 [node name="Field" type="Node2D"]
 script = ExtResource("1_hthpe")
 
-[node name="FigureGenerator" parent="." node_paths=PackedStringArray("figureNode") instance=ExtResource("3_hfyhx")]
-figureList = ExtResource("2_3rcqf")
-figureNode = NodePath("../Figure")
+[node name="FigureGenerator" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("3_hfyhx")]
+figure_list = ExtResource("3_3mxdh")
+figure_node_ref = NodePath("../Figure")
 
-[node name="FigureMover" parent="." node_paths=PackedStringArray("figureNode") instance=ExtResource("4_u8k16")]
-figureNode = NodePath("../Figure")
+[node name="FigureMover" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("4_u8k16")]
+figure_node_ref = NodePath("../Figure")
 
-[node name="CellManager" parent="." node_paths=PackedStringArray("figureNode") instance=ExtResource("5_mpd6f")]
-figureNode = NodePath("../Figure")
+[node name="CellManager" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("5_mpd6f")]
+figure_node_ref = NodePath("../Figure")
 
-[node name="Controller" parent="." node_paths=PackedStringArray("figureMover") instance=ExtResource("5_040dr")]
-figureMover = NodePath("../FigureMover")
+[node name="Controller" parent="." node_paths=PackedStringArray("figure_mover_ref") instance=ExtResource("5_040dr")]
+figure_mover_ref = NodePath("../FigureMover")
 
 [node name="Decorations" type="Node" parent="."]
 

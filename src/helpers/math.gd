@@ -1,13 +1,13 @@
-static func getMinValue(array: Array[int]) -> int:
-    var minValue: int = array[0]
+static func get_min_value(array: Array[int]) -> int:
+    var min_value: int = array[0]
     for value in array:
-        if value < minValue:
-            minValue = value
-    return minValue
+        if value < min_value:
+            min_value = value
+    return min_value
 
-static func getMaxValue(array: Array[int]) -> int:
-    var maxValue: int = array[0]
+static func get_max_value(array: Array[int]) -> int:
+    var max_value: int = array[0]
     for value in array:
-        if value > maxValue:
-            maxValue = value
-    return maxValue
+        if value > max_value:
+            max_value = value
+    return max_value

@@ -1,4 +1,4 @@
-enum cellTypes {
+enum CellTypes {
     EMPTY,
     BASE,
     RANDOM,

@@ -8,29 +8,29 @@ signal figure_set(figure: GameFigure)
 
 @export var figure: GameFigure
 
-@onready var cellManager: CellManager = $CellManager
-@onready var moveManager: MoveManager = $MoveManager
+@onready var cell_manager_ref: CellManager = $CellManager
+@onready var move_manager_ref: MoveManager = $MoveManager
 
 func _ready() -> void:
-    moveManager.init(figure)
-    cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
+    move_manager_ref.init(figure)
+    cell_manager_ref.set_up_cells(move_manager_ref.get_rotation_mode(), figure)
 
-func set_figure(newFigure: GameFigure) -> void:
-    figure = newFigure
+func set_figure(new_figure: GameFigure) -> void:
+    figure = new_figure
 
-    if moveManager: moveManager.init(figure)
-    if cellManager: cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
+    if move_manager_ref: move_manager_ref.init(figure)
+    if cell_manager_ref: cell_manager_ref.set_up_cells(move_manager_ref.get_rotation_mode(), figure)
 
 func move_down_figure() -> void:
-    var hasMoved: bool = moveManager.move_down_figure(figure, self)
-    if !hasMoved: emit_signal("figure_set", figure)
+    var has_moved: bool = move_manager_ref.move_down_figure(figure, self)
+    if !has_moved: emit_signal("figure_set", figure)
 
-func move_figure_side(xDirection: int) -> void:
-    moveManager.move_figure_side(figure, xDirection, self)
+func move_figure_side(x_direction: int) -> void:
+    move_manager_ref.move_figure_side(figure, x_direction, self)
 
 func rotate_figure() -> void:
-    var hasRotated: bool = moveManager.rotate_figure(figure)
-    if hasRotated: cellManager.set_up_cells(moveManager.get_rotation_mode(), figure)
+    var has_rotated: bool = move_manager_ref.rotate_figure(figure)
+    if has_rotated: cell_manager_ref.set_up_cells(move_manager_ref.get_rotation_mode(), figure)
 
 func get_cells() -> Array[CellNode]:
-    return cellManager.get_cells()
+    return cell_manager_ref.get_cells()

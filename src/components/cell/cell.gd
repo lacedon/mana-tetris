@@ -1,23 +1,23 @@
 extends Node2D
 
-const NONE_COLLISION = 0
-const CELL_TYPES = preload("res://src/types/cell_types.gd").cellTypes
+const CellTypes = preload("res://src/types/cell_types.gd").CellTypes
+const Collisions = preload("res://src/common/collisions.gd").Collisions
 
 signal cell_ready
 
-@export var cellType: CELL_TYPES = CELL_TYPES.EMPTY
-@export var isVirtual: bool = false
+@export var cell_type: CellTypes = CellTypes.EMPTY
+@export var is_virtual: bool = false
 
 @onready var polygon: Polygon2D = $Polygon2D
-@onready var area2d: Area2D = $Area2D
-@onready var collisionPolygon: CollisionPolygon2D = $Area2D/CollisionPolygon2D
+@onready var area_2d: Area2D = $Area2D
+@onready var collision_polygon: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 
 func _ready() -> void:
-    make_rectangle(FieldConfig.cellSize)
+    make_rectangle(FieldConfig.cell_size)
     _set_color_by_type()
 
-    if isVirtual:
-        area2d.collision_layer = NONE_COLLISION
+    if is_virtual:
+        area_2d.collision_layer = Collisions.NONE
 
     emit_signal(cell_ready.get_name())
 
@@ -29,28 +29,28 @@ func make_rectangle(size: Vector2) -> void:
         Vector2(size.x, 0)
     ]
     polygon.polygon = corners
-    collisionPolygon.polygon = corners
+    collision_polygon.polygon = corners
 
-func set_cell_type(newType: CELL_TYPES) -> void:
-    cellType = newType
+func set_cell_type(new_type: CellTypes) -> void:
+    cell_type = new_type
     if polygon: _set_color_by_type()
 
 func _set_color_by_type() -> void:
-    match cellType:
-        CELL_TYPES.BASE:
+    match cell_type:
+        CellTypes.BASE:
             polygon.color = Color(0.5, 0.5, 0.5)
-        CELL_TYPES.RANDOM:
+        CellTypes.RANDOM:
             polygon.color = Color(1, 0, 1)
-        CELL_TYPES.HEAL:
+        CellTypes.HEAL:
             polygon.color = Color(0, 1, 0)
-        CELL_TYPES.ATTACK:
+        CellTypes.ATTACK:
             polygon.color = Color(1, 0, 0)
-        CELL_TYPES.MANA_HEAL:
+        CellTypes.MANA_HEAL:
             polygon.color = Color(0, 0, 1)
-        CELL_TYPES.MANA_USAGE:
+        CellTypes.MANA_USAGE:
             polygon.color = Color(1, 1, 0)
         _:
             polygon.color = Color(1, 1, 1) # Default color for unknown types
 
 func get_collision_object() -> CollisionObject2D:
-    return area2d
+    return area_2d

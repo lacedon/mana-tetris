@@ -1,38 +1,37 @@
 extends Node
 
-const FigureScene = preload("res://src/components/figure/figure.tscn")
 const FigureNode = preload("res://src/components/figure/figure.gd")
 
-@export var figureList: GameFigureList
-@export var figureNode: FigureNode
+@export var figure_list: GameFigureList
+@export var figure_node_ref: FigureNode
 
-@onready var currentFigure: GameFigure = get_random_figure()
-@onready var nextFigure: GameFigure = get_random_figure()
+@onready var current_figure: GameFigure = get_random_figure()
+@onready var next_figure: GameFigure = get_random_figure()
 
 func get_random_figure() -> GameFigure:
-    if figureList.figures.size() == 0:
+    if figure_list.figures.size() == 0:
         return null
 
-    var randomIndex: int = randi() % figureList.figures.size()
-    return figureList.figures[randomIndex]
+    var random_index: int = randi() % figure_list.figures.size()
+    return figure_list.figures[random_index]
 
 func use_next_figure() -> void:
-    currentFigure = nextFigure
-    nextFigure = get_random_figure()
+    current_figure = next_figure
+    next_figure = get_random_figure()
 
     respawn_figure()
 
 func _get_field_top_center() -> Vector2:
-    var figureOffsetX: int = floor(float(currentFigure.size.x) / 2) if currentFigure else 0
-    return Vector2(floor(FieldConfig.fieldSize.x / 2) - figureOffsetX, 0) * FieldConfig.cellSize
+    var figure_offset_x: int = floor(float(current_figure.size.x) / 2) if current_figure else 0
+    return Vector2(floor(FieldConfig.field_size.x / 2) - figure_offset_x, 0) * FieldConfig.cell_size
 
 func respawn_figure() -> void:
-    if !currentFigure: return
+    if !current_figure: return
 
-    figureNode.position = _get_field_top_center()
-    figureNode.set_figure(currentFigure)
+    figure_node_ref.position = _get_field_top_center()
+    figure_node_ref.set_figure(current_figure)
 
 func _ready() -> void:
-    if !currentFigure: return
+    if !current_figure: return
 
     respawn_figure()

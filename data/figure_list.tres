@@ -6,22 +6,22 @@
 
 [sub_resource type="Resource" id="Resource_bjxky"]
 script = ExtResource("2_ocwf8")
-cellType = 2
+cell_type = 2
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_a0y6q"]
 script = ExtResource("2_ocwf8")
-cellType = 3
+cell_type = 3
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_y2tk2"]
 script = ExtResource("2_ocwf8")
-cellType = 4
+cell_type = 4
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_07g2d"]
 script = ExtResource("2_ocwf8")
-cellType = 3
+cell_type = 3
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_vfiti"]
@@ -32,22 +32,22 @@ metadata/_custom_type_script = "uid://dm8137324qsco"
 
 [sub_resource type="Resource" id="Resource_1u1k8"]
 script = ExtResource("2_ocwf8")
-cellType = 2
+cell_type = 2
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_ocwf8"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_ayx7f"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_w42wr"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_exmk8"]
@@ -58,22 +58,22 @@ metadata/_custom_type_script = "uid://dm8137324qsco"
 
 [sub_resource type="Resource" id="Resource_p3wxm"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_jaml0"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_3a0i7"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_k8mnk"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_u75bf"]
@@ -84,22 +84,22 @@ metadata/_custom_type_script = "uid://dm8137324qsco"
 
 [sub_resource type="Resource" id="Resource_oaklm"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_6b7ng"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_tk2f3"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_812ch"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_niatc"]
@@ -110,22 +110,22 @@ metadata/_custom_type_script = "uid://dm8137324qsco"
 
 [sub_resource type="Resource" id="Resource_don8t"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_44axt"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_eaxg1"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_2617d"]
 script = ExtResource("2_ocwf8")
-cellType = 1
+cell_type = 1
 metadata/_custom_type_script = "uid://cv7y752m1wxug"
 
 [sub_resource type="Resource" id="Resource_qr1gt"]
