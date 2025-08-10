@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="GameFigureList" load_steps=14 format=3 uid="uid://dp87efq5tu36r"]
+
+[ext_resource type="Script" uid="uid://dm8137324qsco" path="res://src/resources/figure/figure.gd" id="1_diub7"]
+[ext_resource type="Script" uid="uid://cv7y752m1wxug" path="res://src/resources/cell/cell.gd" id="2_3f48w"]
+[ext_resource type="Script" uid="uid://cgcxmbcjg55eg" path="res://src/resources/figure_list/figure_list.gd" id="2_e05d3"]
+
+[sub_resource type="Resource" id="Resource_hkj08"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_83jtj"]
+script = ExtResource("2_3f48w")
+cell_type = 4
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_jkbjj"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_sm6mu"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_051fk"]
+script = ExtResource("1_diub7")
+size = Vector2i(2, 2)
+cells = Array[ExtResource("2_3f48w")]([SubResource("Resource_hkj08"), SubResource("Resource_83jtj"), SubResource("Resource_jkbjj"), SubResource("Resource_sm6mu")])
+metadata/_custom_type_script = "uid://dm8137324qsco"
+
+[sub_resource type="Resource" id="Resource_qe1e0"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_m3mtk"]
+script = ExtResource("2_3f48w")
+cell_type = 4
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_fwl2e"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_seikh"]
+script = ExtResource("2_3f48w")
+cell_type = 1
+metadata/_custom_type_script = "uid://cv7y752m1wxug"
+
+[sub_resource type="Resource" id="Resource_h65ud"]
+script = ExtResource("1_diub7")
+size = Vector2i(1, 4)
+cells = Array[ExtResource("2_3f48w")]([SubResource("Resource_qe1e0"), SubResource("Resource_m3mtk"), SubResource("Resource_fwl2e"), SubResource("Resource_seikh")])
+metadata/_custom_type_script = "uid://dm8137324qsco"
+
+[resource]
+script = ExtResource("2_e05d3")
+figures = Array[ExtResource("1_diub7")]([SubResource("Resource_051fk"), SubResource("Resource_h65ud")])
+metadata/_custom_type_script = "uid://cgcxmbcjg55eg"

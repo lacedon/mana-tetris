@@ -1,15 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj25aci6pg3i2"]
+[gd_scene load_steps=3 format=3 uid="uid://bj25aci6pg3i2"]
 
 [ext_resource type="Script" uid="uid://dm7vov04co8g7" path="res://src/components/cell/cell.gd" id="1_0kby0"]
+[ext_resource type="PackedScene" uid="uid://schmweiwh462" path="res://src/components/cell/cell_visual/cell_visual.tscn" id="2_newaa"]
 
 [node name="Cell" type="Node2D"]
 script = ExtResource("1_0kby0")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+[node name="CellVisual" parent="." instance=ExtResource("2_newaa")]

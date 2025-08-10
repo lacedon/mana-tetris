@@ -12,7 +12,7 @@ func _add_missing_cells(figure_area: int) -> void:
         for index in range(cell_count, figure_area):
             var cell_instance: CellNode = CellScene.instantiate() as CellNode
             cell_instance.name = "Cell#" + str(index)
-            cell_instance.is_virtual = true
+            cell_instance.set_render_mode(CellNode.CellRenderMode.VISUAL_ONLY)
             cell_instance.hide()
             cells.append(cell_instance)
             add_child(cell_instance)

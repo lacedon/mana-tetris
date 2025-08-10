@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ci4ndl0632atk"]
 
 [ext_resource type="Script" uid="uid://cxb7hnsol57tb" path="res://src/components/field/field.gd" id="1_hthpe"]
-[ext_resource type="Resource" uid="uid://cnwnkomu0em8v" path="res://data/figure_list.tres" id="3_3mxdh"]
+[ext_resource type="Resource" uid="uid://dp87efq5tu36r" path="res://data/blocks-and-lines.tres" id="3_3mxdh"]
 [ext_resource type="PackedScene" uid="uid://c41netsr5yoin" path="res://src/components/field/figure_generator/figure_generator.tscn" id="3_hfyhx"]
 [ext_resource type="PackedScene" uid="uid://dcibk1m7gbtwi" path="res://src/components/field/walls/walls.tscn" id="4_6sdv8"]
 [ext_resource type="PackedScene" uid="uid://w2pd6uwe1568" path="res://src/components/field/figure_mover/figure_mover.tscn" id="4_u8k16"]
@@ -52,4 +52,5 @@ text = "Use another figure"
 
 [connection signal="cells_updated" from="CellManager" to="." method="handle_cells_updated"]
 [connection signal="filled_rows_detected" from="RowDetector" to="." method="handle_row_filled"]
+[connection signal="figure_set" from="Figure" to="." method="handle_figure_set"]
 [connection signal="button_up" from="UseNextFigure" to="." method="handle_cells_updated"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://schmweiwh462"]
+
+[ext_resource type="Script" uid="uid://ccaubx2bq7ncd" path="res://src/components/cell/cell_visual/cell_visual.gd" id="1_7panc"]
+
+[node name="CellVisual" type="Polygon2D"]
+script = ExtResource("1_7panc")

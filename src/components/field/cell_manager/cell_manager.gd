@@ -4,22 +4,15 @@ const CellTypes = preload("res://src/types/cell_types.gd").CellTypes
 const FigureNode = preload("res://src/components/figure/figure.gd")
 const CellScene = preload("res://src/components/cell/cell.tscn")
 const CellNode = preload("res://src/components/cell/cell.gd")
-const MathHelpers = preload("res://src/helpers/math.gd")
 
 signal cells_updated
 
 @export var figure_node_ref: FigureNode
 
-func _ready() -> void:
-    figure_node_ref.connect(figure_node_ref.figure_set.get_name(), _set_figure_cells)
-
-func _exit_tree() -> void:
-    figure_node_ref.disconnect(figure_node_ref.figure_set.get_name(), _set_figure_cells)
-
 func _handle_last_cell_ready() -> void:
     emit_signal(cells_updated.get_name())
 
-func _set_figure_cells(figure: GameFigure) -> void:
+func set_figure_cells(figure: GameFigure) -> void:
     var figure_position: Vector2 = figure_node_ref.position
     var figure_cells: Array[CellNode] = figure_node_ref.get_cells()
     var cell_count: int = figure.cells.size()
@@ -42,13 +35,17 @@ func _set_figure_cells(figure: GameFigure) -> void:
         add_child(cell_instance)
 
 func handle_row_filled(row_indexes: Array[int]) -> void:
+    prints('handle_row_filled', row_indexes)
+
+    # TODO: Would be nice not to go through the children
     for cell in get_children():
         if !(cell is CellNode): continue
 
         var cell_row_index: int = cell.position.y / FieldConfig.cell_size.y
         for row_index in row_indexes:
             if row_index == cell_row_index:
-                cell.queue_free()
+                # TODO: Need an entity pool here
+                cell.hide()
             if row_index > cell_row_index:
                 cell.position.y += FieldConfig.cell_size.y            
 
