@@ -22,6 +22,36 @@ func _create_cell_instance(cell: GameCell, cell_node: CellNode, position_offset:
     _global_cell_index += 1
     return cell_instance
 
+func _move_and_delete_row_nodes(filled_row_indexes: Array[int]) -> void:
+    # TODO: Rewrite to work with rows having all the cells instead of the individual cells
+    for cell in get_children():
+        # TODO: Would be nice not to go through the children, but some internal list of cell nodes
+        if !(cell is CellNode): continue
+
+        var cell_row_index: int = round(cell.position.y / FieldConfig.cell_size.y)
+        for filled_row_index in filled_row_indexes:
+            if cell_row_index == filled_row_index:
+                # TODO: Need to rewrite to work with an entity pool here
+                cell.queue_free()
+            elif cell_row_index < filled_row_index:
+                cell.position.y += FieldConfig.cell_size.y
+
+func _sync_cells_per_row(filled_row_indexes: Array[int]) -> void:
+    var rows_count: int = _cells_per_row.size()
+
+    _cells_per_row[0] = 0
+    for filled_row_index in filled_row_indexes:
+        var previous_cells_per_row: Array[int] = _cells_per_row.duplicate()
+        for row_index in range(1, rows_count):
+            if row_index <= filled_row_index:
+                _cells_per_row[row_index] = previous_cells_per_row[row_index - 1] if row_index > 0 else 0
+            else:
+                break
+
+func _handle_row_filled(filled_row_indexes: Array[int]) -> void:
+    _move_and_delete_row_nodes(filled_row_indexes)
+    _sync_cells_per_row(filled_row_indexes)
+
 func set_figure_cells(figure: GameFigure) -> void:
     var figure_position: Vector2 = figure_node_ref.position
     var figure_cells: Array[CellNode] = figure_node_ref.get_cells()
@@ -41,27 +71,6 @@ func set_figure_cells(figure: GameFigure) -> void:
             filled_rows.append(cell_row)
 
     if filled_rows.size() > 0:
-        handle_row_filled(filled_rows)
+        _handle_row_filled(filled_rows)
 
     emit_signal(cells_updated.get_name(), _cells_per_row)
-
-func handle_row_filled(row_indexes: Array[int]) -> void:
-    var previous_cells_per_row: Array[int] = _cells_per_row.duplicate()
-    var rows_count: int = int(FieldConfig.field_size.y)
-
-    # TODO: Rewrite to work with rows having all the cells instead of the individual cells
-    for cell in get_children():
-        # TODO: Would be nice not to go through the children
-        if !(cell is CellNode): continue
-
-        var cell_row_index: int = cell.position.y / FieldConfig.cell_size.y
-        for row_index in row_indexes:
-            if cell_row_index == row_index:
-                # TODO: Need to rewrite to work with an entity pool here
-                cell.queue_free()
-                _cells_per_row[row_index] = 0
-            if cell_row_index < row_index: # 1 19
-                cell.position.y += FieldConfig.cell_size.y
-                _cells_per_row[row_index] = 0
-                if row_index + 1 < rows_count:
-                    _cells_per_row[row_index + 1] += previous_cells_per_row[row_index]
