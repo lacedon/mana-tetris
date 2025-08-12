@@ -10,7 +10,7 @@ signal cells_updated(cells_per_row: Array[int])
 
 @export var figure_node_ref: FigureNode
 
-var _cells_per_row: Array[int] = ArrayHelpers.createArrayInt(FieldConfig.field_size.y)
+var _cells_per_row: Array[int] = ArrayHelpers.createArrayInt(int(FieldConfig.field_size.y))
 var _global_cell_index = 0
 
 func _create_cell_instance(cell: GameCell, cell_node: CellNode, position_offset: Vector2) -> CellNode:
@@ -47,7 +47,7 @@ func set_figure_cells(figure: GameFigure) -> void:
 
 func handle_row_filled(row_indexes: Array[int]) -> void:
     var previous_cells_per_row: Array[int] = _cells_per_row.duplicate()
-    var rows_count: int = FieldConfig.field_size.y
+    var rows_count: int = int(FieldConfig.field_size.y)
 
     # TODO: Rewrite to work with rows having all the cells instead of the individual cells
     for cell in get_children():

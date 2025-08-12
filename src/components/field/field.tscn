@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ci4ndl0632atk"]
+[gd_scene load_steps=12 format=3 uid="uid://ci4ndl0632atk"]
 
 [ext_resource type="Script" uid="uid://cxb7hnsol57tb" path="res://src/components/field/field.gd" id="1_hthpe"]
+[ext_resource type="PackedScene" uid="uid://76cshbuxxjkq" path="res://src/components/camera/camera.tscn" id="2_0jkag"]
 [ext_resource type="PackedScene" uid="uid://dt8u7ssqrmh4b" path="res://src/components/field/row_debugger/row_debugger.tscn" id="2_3mxdh"]
 [ext_resource type="Resource" uid="uid://dp87efq5tu36r" path="res://data/blocks-and-lines.tres" id="3_3mxdh"]
 [ext_resource type="PackedScene" uid="uid://c41netsr5yoin" path="res://src/components/field/figure_generator/figure_generator.tscn" id="3_hfyhx"]
@@ -14,10 +15,7 @@
 [node name="Field" type="Node2D"]
 script = ExtResource("1_hthpe")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(-128, -128)
-anchor_mode = 0
-zoom = Vector2(0.75, 0.75)
+[node name="Camera" parent="." instance=ExtResource("2_0jkag")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
