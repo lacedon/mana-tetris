@@ -20,11 +20,10 @@ script = ExtResource("1_hthpe")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="UseNextFigure" type="Button" parent="UI"]
-visible = false
-offset_left = 16.0
-offset_top = 99.0
-offset_right = 169.0
-offset_bottom = 130.0
+offset_left = 1.0
+offset_top = 641.0
+offset_right = 154.0
+offset_bottom = 672.0
 text = "Use another figure"
 
 [node name="State" type="Node" parent="."]
