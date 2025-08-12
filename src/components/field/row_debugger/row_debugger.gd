@@ -10,12 +10,16 @@ func _create_debug_numbers() -> void:
         var row_index_label: Label = Label.new()
         row_index_label.name = "RowIndex#" + str(i)
         row_index_label.text = "#" + (str(i + 1) if i > 8 else '0' + str(i + 1))
-        row_index_label.position = Vector2(-0.5, i + 0.5) * FieldConfig.cell_size
+        row_index_label.size = FieldConfig.cell_size
+        row_index_label.position = Vector2(-1, i) * FieldConfig.cell_size
 
         var cell_counter_label: Label = Label.new()
         cell_counter_label.name = "CellCounter#" + str(i)
         cell_counter_label.text = "0"
-        cell_counter_label.position = Vector2(FieldConfig.field_size.x + 0.5, i + 0.5) * FieldConfig.cell_size
+        cell_counter_label.position = Vector2(FieldConfig.field_size.x, i) * FieldConfig.cell_size
+        cell_counter_label.size = FieldConfig.cell_size
+        cell_counter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+        cell_counter_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
         cell_counter_labels.append(cell_counter_label)
 
         add_child(row_index_label)
