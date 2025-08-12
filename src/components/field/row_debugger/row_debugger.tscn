@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt8u7ssqrmh4b"]
+
+[ext_resource type="Script" uid="uid://duqc7nyvn1n4a" path="res://src/components/field/row_debugger/row_debugger.gd" id="1_tjgt4"]
+
+[node name="RowDebugger" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tjgt4")

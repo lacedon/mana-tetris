@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7x83ybaqdkl2"]
-
-[ext_resource type="Script" uid="uid://c8ibnagnv8dan" path="res://src/components/field/row_detector/row_detector.gd" id="1_qg5fp"]
-
-[node name="RowDetector" type="Node"]
-script = ExtResource("1_qg5fp")

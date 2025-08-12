@@ -1,6 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ci4ndl0632atk"]
 
 [ext_resource type="Script" uid="uid://cxb7hnsol57tb" path="res://src/components/field/field.gd" id="1_hthpe"]
+[ext_resource type="PackedScene" uid="uid://dt8u7ssqrmh4b" path="res://src/components/field/row_debugger/row_debugger.tscn" id="2_3mxdh"]
 [ext_resource type="Resource" uid="uid://dp87efq5tu36r" path="res://data/blocks-and-lines.tres" id="3_3mxdh"]
 [ext_resource type="PackedScene" uid="uid://c41netsr5yoin" path="res://src/components/field/figure_generator/figure_generator.tscn" id="3_hfyhx"]
 [ext_resource type="PackedScene" uid="uid://dcibk1m7gbtwi" path="res://src/components/field/walls/walls.tscn" id="4_6sdv8"]
@@ -8,41 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://c2hydwapiwltv" path="res://src/components/field/grid/grid.tscn" id="5_0hdck"]
 [ext_resource type="PackedScene" uid="uid://dws6kt3fjmvdt" path="res://src/components/controller/controller.tscn" id="5_040dr"]
 [ext_resource type="PackedScene" uid="uid://diwdpg65wgwks" path="res://src/components/field/cell_manager/cell_manager.tscn" id="5_mpd6f"]
-[ext_resource type="PackedScene" uid="uid://b7x83ybaqdkl2" path="res://src/components/field/row_detector/row_detector.tscn" id="7_3mxdh"]
 [ext_resource type="PackedScene" uid="uid://b57y3wwhyr864" path="res://src/components/figure/figure.tscn" id="7_7y8br"]
 
 [node name="Field" type="Node2D"]
 script = ExtResource("1_hthpe")
-
-[node name="FigureGenerator" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("3_hfyhx")]
-figure_list = ExtResource("3_3mxdh")
-figure_node_ref = NodePath("../Figure")
-
-[node name="FigureMover" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("4_u8k16")]
-figure_node_ref = NodePath("../Figure")
-
-[node name="CellManager" parent="." node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("5_mpd6f")]
-figure_node_ref = NodePath("../Figure")
-
-[node name="Controller" parent="." node_paths=PackedStringArray("figure_mover_ref") instance=ExtResource("5_040dr")]
-figure_mover_ref = NodePath("../FigureMover")
-
-[node name="Decorations" type="Node" parent="."]
-
-[node name="Walls" parent="Decorations" instance=ExtResource("4_6sdv8")]
-
-[node name="Grid" parent="Decorations" instance=ExtResource("5_0hdck")]
-
-[node name="RowDetector" parent="." instance=ExtResource("7_3mxdh")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(-128, -128)
 anchor_mode = 0
 zoom = Vector2(0.75, 0.75)
 
-[node name="Figure" parent="." instance=ExtResource("7_7y8br")]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="UseNextFigure" type="Button" parent="."]
+[node name="UseNextFigure" type="Button" parent="UI"]
 visible = false
 offset_left = 16.0
 offset_top = 99.0
@@ -50,7 +29,33 @@ offset_right = 169.0
 offset_bottom = 130.0
 text = "Use another figure"
 
-[connection signal="cells_updated" from="CellManager" to="." method="handle_cells_updated"]
-[connection signal="filled_rows_detected" from="RowDetector" to="." method="handle_row_filled"]
-[connection signal="figure_set" from="Figure" to="." method="handle_figure_set"]
-[connection signal="button_up" from="UseNextFigure" to="." method="handle_cells_updated"]
+[node name="State" type="Node" parent="."]
+
+[node name="FigureGenerator" parent="State" node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("3_hfyhx")]
+figure_list = ExtResource("3_3mxdh")
+figure_node_ref = NodePath("../../Level/Figure")
+
+[node name="FigureMover" parent="State" node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("4_u8k16")]
+figure_node_ref = NodePath("../../Level/Figure")
+
+[node name="CellManager" parent="State" node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("5_mpd6f")]
+figure_node_ref = NodePath("../../Level/Figure")
+
+[node name="Controller" parent="State" node_paths=PackedStringArray("figure_mover_ref") instance=ExtResource("5_040dr")]
+figure_mover_ref = NodePath("../FigureMover")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="Decorations" type="Node" parent="Level"]
+
+[node name="Walls" parent="Level/Decorations" instance=ExtResource("4_6sdv8")]
+
+[node name="Grid" parent="Level/Decorations" instance=ExtResource("5_0hdck")]
+
+[node name="RowDebugger" parent="Level" instance=ExtResource("2_3mxdh")]
+
+[node name="Figure" parent="Level" instance=ExtResource("7_7y8br")]
+
+[connection signal="button_up" from="UI/UseNextFigure" to="." method="handle_cells_updated"]
+[connection signal="cells_updated" from="State/CellManager" to="." method="handle_cells_updated"]
+[connection signal="figure_set" from="Level/Figure" to="." method="handle_figure_set"]
