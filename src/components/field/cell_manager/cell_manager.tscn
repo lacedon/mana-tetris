@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://diwdpg65wgwks"]
+[gd_scene load_steps=3 format=3 uid="uid://diwdpg65wgwks"]
 
 [ext_resource type="Script" uid="uid://caotjalvcutwr" path="res://src/components/field/cell_manager/cell_manager.gd" id="1_ds5rh"]
+[ext_resource type="PackedScene" uid="uid://dc4ofpypjdyan" path="res://src/components/entity_pool/entity_pool.tscn" id="2_eiqma"]
 
 [node name="CellManager" type="Node"]
 script = ExtResource("1_ds5rh")
+
+[node name="EntityPool" parent="." instance=ExtResource("2_eiqma")]

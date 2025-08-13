@@ -35,8 +35,9 @@ figure_node_ref = NodePath("../../Level/Figure")
 [node name="FigureMover" parent="State" node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("4_u8k16")]
 figure_node_ref = NodePath("../../Level/Figure")
 
-[node name="CellManager" parent="State" node_paths=PackedStringArray("figure_node_ref") instance=ExtResource("5_mpd6f")]
+[node name="CellManager" parent="State" node_paths=PackedStringArray("figure_node_ref", "cell_container") instance=ExtResource("5_mpd6f")]
 figure_node_ref = NodePath("../../Level/Figure")
+cell_container = NodePath("../../Level/Cells")
 
 [node name="Controller" parent="State" node_paths=PackedStringArray("figure_mover_ref") instance=ExtResource("5_040dr")]
 figure_mover_ref = NodePath("../FigureMover")
@@ -52,6 +53,8 @@ figure_mover_ref = NodePath("../FigureMover")
 [node name="RowDebugger" parent="Level" instance=ExtResource("2_3mxdh")]
 
 [node name="Figure" parent="Level" instance=ExtResource("7_7y8br")]
+
+[node name="Cells" type="Node" parent="Level"]
 
 [connection signal="button_up" from="UI/UseNextFigure" to="." method="handle_cells_updated"]
 [connection signal="cells_updated" from="State/CellManager" to="." method="handle_cells_updated"]

@@ -5,34 +5,51 @@ const FigureNode = preload("res://src/components/figure/figure.gd")
 const CellScene = preload("res://src/components/cell/cell.tscn")
 const CellNode = preload("res://src/components/cell/cell.gd")
 const ArrayHelpers = preload("res://src/helpers/array.gd")
+const EntityPool = preload("res://src/components/entity_pool/entity_pool.gd")
 
 signal cells_updated(cells_per_row: Array[int])
 
 @export var figure_node_ref: FigureNode
+@export var cell_container: Node
+
+@onready var entity_pool: EntityPool = $EntityPool
 
 var _cells_per_row: Array[int] = ArrayHelpers.createArrayInt(int(FieldConfig.field_size.y))
-var _global_cell_index = 0
 
-func _create_cell_instance(cell: GameCell, cell_node: CellNode, position_offset: Vector2) -> CellNode:
+func _ready() -> void:
+    if !cell_container: cell_container = self
+
+    entity_pool.init(
+        _create_cell,
+        int(FieldConfig.field_size.x * FieldConfig.field_size.y),
+        EntityPool.IncreasingMode.FACTORIAL,
+        cell_container
+    )
+
+func _create_cell(index: int) -> Node:
     var cell_instance: CellNode = CellScene.instantiate()
-    var cell_position: Vector2 = position_offset + cell_node.position
-    cell_instance.name = "Cell #" + str(_global_cell_index)
+    cell_instance.name = "Cell #" + str(index)
+    return cell_instance
+
+func _create_cell_instance(cell: GameCell, cell_node: CellNode, offset: Vector2) -> CellNode:
+    var cell_instance: CellNode = entity_pool.get_free_entity()
+    var cell_position: Vector2 = offset + cell_node.position
     cell_instance.set_cell_type(cell.cell_type)
     cell_instance.position = cell_position
-    _global_cell_index += 1
     return cell_instance
 
 func _move_and_delete_row_nodes(filled_row_indexes: Array[int]) -> void:
-    # TODO: Rewrite to work with rows having all the cells instead of the individual cells
-    for cell in get_children():
-        # TODO: Would be nice not to go through the children, but some internal list of cell nodes
-        if !(cell is CellNode): continue
+    var used_entities = entity_pool.get_used_entities()
+    var index_offset = 0
 
+    # TODO: Rewrite to work with rows having all the cells instead of the individual cells
+    for cell_index in range(used_entities.size()):
+        var cell = used_entities[cell_index + index_offset]
         var cell_row_index: int = round(cell.position.y / FieldConfig.cell_size.y)
         for filled_row_index in filled_row_indexes:
             if cell_row_index == filled_row_index:
-                # TODO: Need to rewrite to work with an entity pool here
-                cell.queue_free()
+                entity_pool.remove_entity(cell)
+                index_offset -= 1
             elif cell_row_index < filled_row_index:
                 cell.position.y += FieldConfig.cell_size.y
 
@@ -63,7 +80,6 @@ func set_figure_cells(figure: GameFigure) -> void:
         if !cell || cell.cell_type == CellTypes.EMPTY: continue
 
         var cell_instance: CellNode = _create_cell_instance(cell, figure_cells[cell_index], figure_position)
-        add_child(cell_instance)
 
         var cell_row: int = round(cell_instance.position.y / FieldConfig.cell_size.y)
         _cells_per_row[cell_row] += 1
