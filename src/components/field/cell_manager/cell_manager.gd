@@ -39,12 +39,12 @@ func _create_cell_instance(cell: GameCell, cell_node: CellNode, offset: Vector2)
     return cell_instance
 
 func _move_and_delete_row_nodes(filled_row_indexes: Array[int]) -> void:
-    var used_entities = entity_pool.get_used_entities()
-    var index_offset = 0
+    var used_entities: Array[Node] = entity_pool.get_used_entities()
+    var index_offset: int = 0
 
     # TODO: Rewrite to work with rows having all the cells instead of the individual cells
     for cell_index in range(used_entities.size()):
-        var cell = used_entities[cell_index + index_offset]
+        var cell: CellNode = used_entities[cell_index + index_offset]
         var cell_row_index: int = round(cell.position.y / FieldConfig.cell_size.y)
         for filled_row_index in filled_row_indexes:
             if cell_row_index == filled_row_index:
