@@ -56,6 +56,6 @@ figure_mover_ref = NodePath("../FigureMover")
 
 [node name="Cells" type="Node" parent="Level"]
 
-[connection signal="button_up" from="UI/UseNextFigure" to="." method="handle_cells_updated"]
+[connection signal="button_up" from="UI/UseNextFigure" to="." method="use_next_figure"]
 [connection signal="cells_updated" from="State/CellManager" to="." method="handle_cells_updated"]
 [connection signal="figure_set" from="Level/Figure" to="." method="handle_figure_set"]

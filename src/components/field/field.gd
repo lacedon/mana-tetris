@@ -8,6 +8,9 @@ const RowDebugger = preload("res://src/components/field/row_debugger/row_debugge
 @onready var cell_manager: CellManager = $State/CellManager
 @onready var row_debugger: RowDebugger = $Level/RowDebugger
 
+func use_next_figure() -> void:
+    figure_generator.use_next_figure()
+
 func handle_cells_updated(cells_per_row: Array[int]) -> void:
     figure_generator.use_next_figure()
     row_debugger.show_debug_info(cells_per_row)
