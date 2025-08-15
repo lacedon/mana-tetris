@@ -53,5 +53,18 @@ func remove_entity(entity: Node) -> void:
         _used_entities.erase(entity)
         _free_entities.append(entity)
 
+func remove_entity_by_index(index: int) -> void:
+    if index < 0 or index >= _used_entities.size():
+        return
+    return remove_entity(_used_entities[index])
+
+func get_cell_by_index(index: int, should_create_if_missing: bool) -> Node:
+    if index < 0 or index >= _used_entities.size():
+        return get_free_entity() if should_create_if_missing else null
+    return _used_entities[index]
+
 func get_used_entities() -> Array[Node]:
     return _used_entities
+
+func get_used_entities_count() -> int:
+    return _used_entities.size()

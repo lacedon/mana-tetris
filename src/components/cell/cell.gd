@@ -27,6 +27,7 @@ func _ready() -> void:
 
 func set_cell_type(new_type: CellTypes = cell_type) -> void:
     cell_type = new_type
+    visible = cell_type != CellTypes.EMPTY
     if (cell_visual): cell_visual.init(new_type)
 
 func set_render_mode(new_mode: CellRenderMode) -> void:

@@ -22,7 +22,7 @@ func _ready() -> void:
     entity_pool.init(
         _create_cell,
         int(FieldConfig.field_size.x * FieldConfig.field_size.y),
-        EntityPool.IncreasingMode.FACTORIAL,
+        EntityPool.IncreasingMode.LINEAR,
         cell_container
     )
 

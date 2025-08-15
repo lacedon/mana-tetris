@@ -5,7 +5,7 @@ const CellTypes = preload("res://src/types/cell_types.gd").CellTypes
 var current_size: Vector2 = Vector2.ZERO
 
 func init(cell_type: CellTypes, size: Vector2 = current_size) -> void:
-    _set_color_by_type(cell_type)
+    _set_cell_type(cell_type)
     _set_size(size)
 
 func _set_size(size: Vector2) -> void:
