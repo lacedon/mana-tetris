@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy42fa8f8l1n0"]
+
+[ext_resource type="PackedScene" uid="uid://dcibk1m7gbtwi" path="res://src/components/field/walls/walls.tscn" id="1_nmw45"]
+[ext_resource type="PackedScene" uid="uid://c2hydwapiwltv" path="res://src/components/field/grid/grid.tscn" id="2_gda84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_siojj"]
+size = Vector2(32, 32)
+
+[node name="Test" type="Node2D"]
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="Walls" parent="Decorations" instance=ExtResource("1_nmw45")]
+
+[node name="Grid" parent="Decorations" instance=ExtResource("2_gda84")]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 7
+
+[node name="Cells" type="Node2D" parent="RigidBody2D"]
+
+[node name="Cell#1" type="Node2D" parent="RigidBody2D/Cells"]
+position = Vector2(64, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Cells/Cell#1"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D/Cells/Cell#1"]
+color = Color(1, 0.309804, 1, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell#2" type="Node2D" parent="RigidBody2D/Cells"]
+position = Vector2(64, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Cells/Cell#2"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D/Cells/Cell#2"]
+color = Color(1, 0.309804, 1, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell#3" type="Node2D" parent="RigidBody2D/Cells"]
+position = Vector2(96, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Cells/Cell#3"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D/Cells/Cell#3"]
+color = Color(1, 0.309804, 1, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(112, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(80, 48)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(80, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Cells" type="StaticBody2D" parent="."]
+
+[node name="Cell#1" type="Node2D" parent="Cells"]
+position = Vector2(0, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cells/Cell#1"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cells/Cell#1"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell#2" type="Node2D" parent="Cells"]
+position = Vector2(32, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cells/Cell#2"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cells/Cell#2"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell#3" type="Node2D" parent="Cells"]
+position = Vector2(64, 608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cells/Cell#3"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cells/Cell#3"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell#4" type="Node2D" parent="Cells"]
+position = Vector2(96, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cells/Cell#4"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cells/Cell#4"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cells"]
+position = Vector2(16, 592)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Cells"]
+position = Vector2(48, 592)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Cells"]
+position = Vector2(80, 624)
+shape = SubResource("RectangleShape2D_siojj")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Cells"]
+position = Vector2(112, 592)
+shape = SubResource("RectangleShape2D_siojj")
