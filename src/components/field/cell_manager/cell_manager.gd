@@ -70,7 +70,7 @@ func _handle_row_filled(filled_row_indexes: Array[int]) -> void:
     _sync_cells_per_row(filled_row_indexes)
 
 func set_figure_cells(figure: GameFigure) -> void:
-    var figure_position: Vector2 = figure_node_ref.position
+    var figure_position: Vector2 = figure_node_ref.get_body_position()
     var figure_cells: Array[CellNode] = figure_node_ref.get_cells()
     var cell_count: int = figure.cells.size()
     var filled_rows: Array[int] = []

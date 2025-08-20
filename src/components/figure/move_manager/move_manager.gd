@@ -1,4 +1,6 @@
-extends Node
+extends Node2D
+
+@export var body: Node2D
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
@@ -10,6 +12,10 @@ func _define_ray_cast_2d(figure: GameFigure) -> void:
 
 func _can_move_to(target: Vector2) -> bool:
     if !ray_cast_2d: return false
+
+    # TODO: It's temporary solution. Need to move the figure with logic related to character body
+    self.position = body.position
+
     ray_cast_2d.target_position = target
     ray_cast_2d.force_raycast_update()
     return !ray_cast_2d.is_colliding()

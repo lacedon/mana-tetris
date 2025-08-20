@@ -7,6 +7,12 @@
 [node name="Figure" type="Node2D"]
 script = ExtResource("1_b7ta8")
 
-[node name="MoveManager" parent="." instance=ExtResource("3_6ys1a")]
+[node name="MoveManager" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_6ys1a")]
+body = NodePath("../Body")
 
-[node name="CellManager" parent="." instance=ExtResource("2_her3s")]
+[node name="CellManager" parent="." node_paths=PackedStringArray("cell_container") instance=ExtResource("2_her3s")]
+cell_container = NodePath("../Body")
+
+[node name="Body" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 7
