@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj25aci6pg3i2"]
+[gd_scene load_steps=4 format=3 uid="uid://bj25aci6pg3i2"]
 
 [ext_resource type="Script" uid="uid://dm7vov04co8g7" path="res://src/components/cell/cell.gd" id="1_0kby0"]
 [ext_resource type="PackedScene" uid="uid://schmweiwh462" path="res://src/components/cell/cell_visual/cell_visual.tscn" id="2_newaa"]
 
-[node name="Cell" type="Node2D"]
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_newaa"]
+points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[node name="Cell" type="CollisionShape2D"]
+shape = SubResource("ConvexPolygonShape2D_newaa")
 script = ExtResource("1_0kby0")
 
 [node name="CellVisual" parent="." instance=ExtResource("2_newaa")]

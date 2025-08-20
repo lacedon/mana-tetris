@@ -54,7 +54,8 @@ figure_mover_ref = NodePath("../FigureMover")
 
 [node name="Figure" parent="Level" instance=ExtResource("7_7y8br")]
 
-[node name="Cells" type="Node" parent="Level"]
+[node name="Cells" type="StaticBody2D" parent="Level"]
+collision_mask = 0
 
 [connection signal="button_up" from="UI/UseNextFigure" to="." method="use_next_figure"]
 [connection signal="cells_updated" from="State/CellManager" to="." method="handle_cells_updated"]
